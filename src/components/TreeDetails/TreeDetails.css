@@ -1,0 +1,45 @@
+.tree-details-container {
+  width: 100%;
+  margin: 1%;
+  padding: 0.1rem;
+  align-self: flex-start;
+  background-color: #fff;
+}
+.tree-details-holder,
+.tree-name-holder,
+.tree-species-holder,
+.tree-image-toggle-btn-holder {
+  width: 100%;
+}
+
+.tree-name-holder,
+.tree-species-holder{
+    padding: 0.5rem;
+}
+.tree-image-toggle-btn-holder {
+    padding: 1rem;
+}
+
+/* Mobile Styles */
+@media only screen and (max-width: 400px) {
+  .tree-details-container {
+    /* width: 95%; */
+    margin: 4% 0;
+  }
+}
+
+/* Tablet Styles and some mobiles */
+@media only screen and (min-width: 401px) and (max-width: 960px) {
+  .tree-details-container {
+    width: 48%;
+    /* min-width: 320px; */
+  }
+}
+
+/* Desktop Styles */
+@media only screen and (min-width: 961px) {
+  .tree-details-container {
+    width: 48%;
+    margin: 1%;
+  }
+}
