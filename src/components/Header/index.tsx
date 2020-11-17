@@ -7,7 +7,7 @@ interface Props {
 
 const Header: React.FC<Props> = ({title}) => {
     return (
-        <header className="main-header">
+        <header className="main-header shadow">
             <div className="header-container">
                 <div className="header-title"><h1>{title}</h1></div>
             </div>

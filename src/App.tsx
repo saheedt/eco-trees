@@ -3,7 +3,9 @@ import { request } from './utils';
 import './App.css';
 import Header from './components/Header'
 import TreeList from './screens/TreeList';
-import logo from './logo.svg'
+import Error from './components/Error';
+import Button from './components/Button';
+import Loader from './components/Loader';
 
 interface Tree {
   name: string;
@@ -16,45 +18,46 @@ interface requestError {
 }
 
 function App() {
-  // const url = 'https://s3.eu-central-1.amazonaws.com/ecosia-frontend-developer/trees.json';
   const url = process.env.REACT_APP_TREES_API!
-  console.log('url: ', url);
 
   const [trees, setTrees] = useState<Tree[] | undefined>(undefined);
   const [error, setError] = useState<requestError | undefined>(undefined);
   const [loading, setLoading] = useState(true);
 
   const fetchTrees = useCallback(async (url: string) => {
-    // might be a need to setError(undefined)
-    // retry mechanism is built in.
     try {
-        const [incoingTrees, error] = await request({ url, method: 'GET', });
-        error && setError(error) && console.log("fetcherr: ", error);
-        incoingTrees && setTrees(incoingTrees.trees);
-        setLoading(false);
+      const [incoingTrees, error] = await request({ url, method: 'GET', });
+      error && setError(error);
+      incoingTrees && setTrees(incoingTrees.trees);
+      setLoading(false);
     } catch (error) {
-        console.log('errrrrr: ', error);
-        setError(error);
-        setLoading(false);
+      setError(error);
+      setLoading(false);
     }
-  }, [])
+  }, []);
+
+  const retry = () => {
+    setLoading(true);
+    setError(undefined);
+    fetchTrees(url);
+  }
 
   useEffect(() => {
     fetchTrees(url);
   }, [fetchTrees, url]);
-
-  if (error) {
-   return (<div>Error Fetching Trees !!</div>);
-  }
   
   return (
     <main className="App">
-      <Header title="Ecosia Trees"/>
-      {
+      <Header title="Ecosia Trees" />
+      {error ?
+          <Error message="Error Fetching Trees!!">
+            <Button title="Retry" extraStyle={{ height: '50px', backgroundColor: '#ffffff' }} clickHandler={retry} />
+          </Error>
+        :
         loading ?
-          <img src={logo} className="App-logo" alt="spinning react logo" />
+            <Loader />
           :
-          <TreeList trees={trees!}/>
+            <TreeList trees={trees!} retry={retry} />
       }
     </main>
   );

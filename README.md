@@ -1,12 +1,12 @@
 # Getting Started
 
-To get this project to run, a `.env.local` file should be created in the root directory with an entry `REACT_APP_TREES_API` which holds the supplied trees endpoint.
+In your terminal of choice, run `npm install` to install all dependencies.
 
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `npm start`
+### `npm start:dev`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -25,6 +25,8 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 The build is minified and the filenames include the hashes.\
 The app is ready to be deployed!
+
+To run the the production build, run `npm start` then navigate to [http://localhost:9000](http://localhost:9000) to view the production application in the browser.
 
 
 ### `npm run eject`

@@ -19,15 +19,11 @@ const request = async (
     const response = await Axios(options.url, {
       method: options.method,
       headers: options.headers,
-    //   searchParams: options.params,
       responseType: "json",
     });
-      console.log("response: ", response);
     return [response.data, undefined];
   } catch (error) {
-      console.log('error: ', error);
     if (error) {
-    //   const errorBody = error.response.body;
       return [
         undefined,
         {

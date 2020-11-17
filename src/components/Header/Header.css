@@ -5,8 +5,7 @@
   justify-content: center;
   background-color: #e2f6f7;
   position: fixed;
-  /* #00bfa5; */
-  /* z-index: 2; */
+  z-index: 2;
 }
 
 .header-container {

@@ -1,5 +1,7 @@
 import React from 'react';
 import TreeDetails from '../../components/TreeDetails';
+import NotFound from '../../components/NotFound';
+import Button from '../../components/Button';
 
 import './TreeList.css';
 
@@ -10,10 +12,11 @@ interface Tree {
 }
 
 interface Props {
-    trees: Tree[]
+    trees: Tree[],
+    retry?: () => void
 }
 
-const TreeList: React.FC<Props> = ({ trees }) => {
+const TreeList: React.FC<Props> = ({ trees, retry }) => {
 
     const renderTrees = () => {
         return (trees && trees.length) ?
@@ -26,7 +29,9 @@ const TreeList: React.FC<Props> = ({ trees }) => {
                 />
             ))
             :
-        <h3>No trees found!</h3>
+            <NotFound message="No trees found!">
+                <Button title="Retry" extraStyle={{ height: '50px' }} clickHandler={retry} />
+            </NotFound>
     };
 
     return (
